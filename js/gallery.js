@@ -64,6 +64,7 @@ const images = [
   },
 ];
 
+
 const gallery = document.querySelector(".gallery");
 
 const galleryMarkup = images
@@ -79,3 +80,16 @@ const galleryMarkup = images
              </li>`).join('');
  
 gallery.insertAdjacentHTML("beforeend", galleryMarkup);
+
+gallery.addEventListener("click", (event) => {
+  if (event.target.tagName === "IMG") {
+    event.preventDefault();
+    const imageSrc = event.target.dataset.source;
+
+    const instance = basicLightbox.create(`
+      <img src="${imageSrc}" alt="${event.target.alt}">
+    `);
+
+    instance.show();
+  }
+});
